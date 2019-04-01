@@ -1,0 +1,96 @@
+disasm.o: disasm.c main.h memAlloc.h m68000.h stMemory.h
+audio.o: audio.c main.h audio.h \
+ configuration.h \
+ memAlloc.h misc.h 
+configuration.o: configuration.c main.h \
+ configuration.h dialog.h video.h \
+ screen.h shortcut.h \
+ memAlloc.h file.h ../cpu/hatari-glue.h \
+ ../cpu/sysdeps.h hostcall.h
+dialog.o: dialog.c main.h configuration.h \
+ audio.h dialog.h file.h \
+ hostcall.h \
+ keymap.h m68000.h memAlloc.h \
+ misc.h \
+ reset.h screen.h \
+ video.h sdlgui.h \
+ ../cpu/hatari-glue.h ../cpu/sysdeps.h 
+file.o: file.c main.h file.h \
+ memAlloc.h misc.h
+hostcall.o: hostcall.c main.h \
+ decode.h ../cpu/sysdeps.h \
+ ../cpu/maccess.h ../cpu/memory.h ../cpu/newcpu.h ../cpu/readcpu.h \
+ ../cpu/m68k.h configuration.h file.h \
+ hostcall.h m68000.h \
+ memAlloc.h misc.h \
+ stMemory.h \
+ ../cpu/hatari-glue.h
+int.o: int.c main.h decode.h \
+ ../cpu/sysdeps.h ../cpu/maccess.h ../cpu/memory.h \
+ ../cpu/newcpu.h ../cpu/readcpu.h ../cpu/m68k.h \
+ int.h m68000.h memAlloc.h \
+ misc.h \
+ video.h
+keymap.o: keymap.c main.h keymap.h \
+ memAlloc.h misc.h configuration.h \
+ shortcut.h screen.h
+m68000.o: m68000.c main.h \
+ decode.h ../cpu/sysdeps.h \
+ ../cpu/maccess.h ../cpu/memory.h ../cpu/newcpu.h ../cpu/readcpu.h \
+ ../cpu/m68k.h hostcall.h ../cpu/hatari-glue.h int.h \
+ m68000.h \
+ stMemory.h 
+main.o: main.c main.h configuration.h \
+ decode.h ../cpu/sysdeps.h \
+ ../cpu/maccess.h ../cpu/memory.h ../cpu/newcpu.h ../cpu/readcpu.h \
+ ../cpu/m68k.h dialog.h \
+ audio.h \
+ file.h hostcall.h \
+ reset.h \
+ keymap.h m68000.h \
+ misc.h screen.h \
+ sdlgui.h shortcut.h \
+ video.h \
+ ../cpu/hatari-glue.h
+memAlloc.o: memAlloc.c main.h memAlloc.h
+misc.o: misc.c main.h \
+ file.h memAlloc.h misc.h
+reset.o: reset.c main.h decode.h \
+ ../cpu/sysdeps.h ../cpu/maccess.h ../cpu/memory.h \
+ ../cpu/newcpu.h ../cpu/readcpu.h ../cpu/m68k.h \
+ hostcall.h int.h \
+ m68000.h misc.h \
+ reset.h screen.h stMemory.h \
+ video.h
+stMemory.o: stMemory.c main.h decode.h \
+ ../cpu/sysdeps.h ../cpu/maccess.h ../cpu/memory.h \
+ ../cpu/newcpu.h ../cpu/readcpu.h ../cpu/m68k.h m68000.h \
+ memAlloc.h
+screen.o: screen.c scalebit.h main.h configuration.h \
+ m68000.h memAlloc.h misc.h \
+ screen.h screenConvert.h \
+ video.h
+screenConvert.o: screenConvert.c scalebit.h main.h screen.h \
+ screenConvert.h \
+ video.h 
+sdlgui.o: sdlgui.c main.h memAlloc.h \
+ screen.h sdlgui.h file.h 
+shortcut.o: shortcut.c main.h dialog.h \
+ configuration.h audio.h \
+ memAlloc.h reset.h \
+ screen.h shortcut.h
+loadfe2.o: loadfe2.c loadfe2.h main.h \
+ decode.h ../cpu/sysdeps.h \
+ ../cpu/maccess.h ../cpu/memory.h ../cpu/newcpu.h ../cpu/readcpu.h \
+ ../cpu/m68k.h dialog.h configuration.h \
+ file.h hostcall.h \
+ m68000.h memAlloc.h \
+ stMemory.h 
+video.o: video.c main.h decode.h \
+ ../cpu/sysdeps.h ../cpu/maccess.h ../cpu/memory.h \
+ ../cpu/newcpu.h ../cpu/readcpu.h ../cpu/m68k.h \
+ configuration.h int.h \
+ keymap.h m68000.h \
+ memAlloc.h \
+ screen.h shortcut.h \
+ stMemory.h video.h

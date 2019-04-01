@@ -1,0 +1,141 @@
+
+outstanding introduced/emulation bugs:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+frontier bug: intro uses space colour all the time even for
+planetary scenes. perhaps this explains why frontier starts
+with bright blue space, and on first hyperspace it is set
+to a darker blue (revealing the milkway thingy).
+
+search for 'XXX' to find comments on known breakage.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TODO
+
+convert galaxy map routines to new line drawing funcs
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+a6_base = 0x5eb6
+
+L877c (10438(a6)) == 0 => 4096 cols (512 switching)
+
+L41d44
+
+pal1 = 15876
+pal2 = 15908
+
+kbhandler:
+
+A6_keystates_base = 16342
+
+-2(a0) = 16340
+-3(a0) = 16339
+-4(a0) = 16338
+-5(a0) = 16337
+-6(a0) = 16336
+-8(a0) = 16334
+-10(a0) = 16332
+
+(where lea A6_keystates_base(a6),a0):
+
+on key release:
+--------------------------------------------------
+0 -> -3(a0)
+0 -> -4(a0)
+0 -> -6(a0)
+
+on key press (if byte -4(a0) != pressed scancode):
+--------------------------------------------------
+-5(a0) -> -8(a0)
+-2(a0) -> -10(a0)
+-1(a0) -> -9(a0)
+0 -> -2(a0)
+pressed code -> -3(a0)
+pressed code -> -4(a0)
+pressed code -> -6(a0)
+
+on key press (if byte -4(a0) == pressed scancode):
+--------------------------------------------------
+0 -> -3(a0)
+0 -> -4(a0)
+0 -> -6(a0)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+on calling FmtStr:
+	d0 = 0x941a	<- some kind of index to a string table. 40(modtable)
+	                   obtains the filthy string thing. oh god.
+	d4 = 0xf	<- colour
+	d5 = 0x28	<- x
+	d6 = 0x14	<- y
+	d7 = 0x0	<- ??
+
+d0:
+	0x3015	"%08x" hex (in d3)
+	0x3014	"%08x" hex (in d2)
+	0x3013	"%08x" hex (in d1)
+	0x3012	HH:MM:SS (in d3)
+	0x3011	HH:MM:SS (in d2)
+	0x3010	HH:MM:SS (in d1)
+	0x300f	dd-mon-year (day of year in d3)
+	0x300e	dd-mon-year (in d2)
+	0x300d	dd-mon-year (in d1)
+	0x300c	int32 3 dec places (in d3)
+	0x300b	int32 3 dec places (in d2)
+	0x300a	int32 3 dec places (in d1)
+	0x3009	int32 2 dec places (in d3)
+	0x3008	int32 2 dec places (in d2)
+	0x3007	int32 2 dec places (in d1)
+	0x3006	int32 1 dec place (in d3)
+	0x3005	int32 1 dec place (in d2)
+	0x3004	int32 1 dec place (in d1)
+	0x3003	int32 (in d3)
+	0x3002	int32 (in d2)
+	0x3001	int32 (in d1)
+	0x3000  erm, like, do last thing printed.
+
+SFX indices:
+~~~~~~~~~~~~~
+
+	0	ui_beep
+	1	laser0
+	2	laser1
+	3	laser2
+	4	launch_granted
+	5	station_door_open
+	6	explode1
+	7	??
+	8	explode2
+	9	explode3
+	10	explode4
+	11	explode5
+	12	explode6
+	13	explode7
+	14	explode8
+	15	explode9
+	16	explode10
+	17	laser_burn
+	18	??
+	19	hyperspace (loop)
+	20	hyperspace_end
+	21	send_message
+	22	fire_missile
+	23	noise (loop)
+	24	ECM
+	25	warning!
+	26	retract wheels (?)
+	27	<silence?>
+	28	select object
+	29	bing
+	30	big bing!
+	31	launch_noise
+	32	dildo
+
+modfuncs:
+~~~~~~~~~
+4(a4) - init
+20(a4) - every turn in 3d view
+40(a4) - get string
+
+
