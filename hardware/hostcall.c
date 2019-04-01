@@ -16,12 +16,25 @@
 
 #include <sys/stat.h>
 #include <time.h>
+#ifdef _MSC_VER
+#include "msvc_dirent.h"
+#else
 #include <dirent.h>
-#include <ctype.h>
 #include <unistd.h>
+#endif
+#include <ctype.h>
+
+
+#ifdef _WIN32
+#include "win32-glob.h"
+#include "scandir.h"
+typedef unsigned short mode_t;
+#else
 #include <glob.h>
-#include <SDL/SDL.h>
-#include <SDL/SDL_endian.h>
+#endif
+
+#include <SDL.h>
+#include <SDL_endian.h>
 
 #include "main.h"
 #include "decode.h"
@@ -40,13 +53,22 @@
 
 #include "../cpu/hatari-glue.h"
 
+#ifdef _MSC_VER
+//not #if defined(_WIN32) || defined(_WIN64) because we have strncasecmp in mingw
+#define strncasecmp _strnicmp
+#define strcasecmp _stricmp
+#endif
+
+
 //#define GEMDOS_VERBOSE
 // uncomment the following line to debug filename lookups on hd
 // #define FILE_DEBUG 1
 
-#define ENABLE_SAVING             /* Turn on saving stuff */
+#define ENABLE_SAVING 1            /* Turn on saving stuff */
 
-#define INVALID_HANDLE_VALUE -1
+// this conflicts with INVALID_HANDLE_VALUE
+// but apparently isn't used?
+// #define INVALID_HANDLE_VALUE -1
 
 #ifndef MAX_PATH
 #define MAX_PATH 256
@@ -56,7 +78,7 @@
  * on some systems. We should probably use something different for this
  * case, but at the moment it we simply define it as 0... */
 #ifndef GLOB_ONLYDIR
-#warning GLOB_ONLYDIR was not defined.
+//#warning GLOB_ONLYDIR was not defined.
 #define GLOB_ONLYDIR 0
 #endif
 
@@ -862,6 +884,8 @@ void GemDOS_SFirst(unsigned long Params)
     closedir( fsdir );
 
     InternalDTAs[DTAIndex].nentries = scandir(InternalDTAs[DTAIndex].path, &files, 0, alphasort);
+//fprintf(stderr,"hostcall.c using scandir without alphasort...!\n");
+//    InternalDTAs[DTAIndex].nentries = scandir(InternalDTAs[DTAIndex].path, &files, 0, 0);
     if( InternalDTAs[DTAIndex].nentries < 0 ){
       Regs[REG_D0] = GEMDOS_EFILNF;        /* File (directory actually) not found */
       return;

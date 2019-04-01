@@ -16,6 +16,10 @@
 #include "memAlloc.h"
 #include "misc.h"
 
+#ifdef _MSC_VER
+#define strncasecmp _strnicmp
+#define strcasecmp _stricmp
+#endif
 
 
 #ifdef __BEOS__

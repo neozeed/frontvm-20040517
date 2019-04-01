@@ -1,6 +1,6 @@
 
-#include <SDL/SDL_endian.h>
-#include <SDL/SDL_mouse.h>
+#include <SDL_endian.h>
+#include <SDL_mouse.h>
 
 #include "main.h"
 #include "decode.h"

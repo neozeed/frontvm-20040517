@@ -12,7 +12,7 @@
   */
 static char rcsid[] = "Hatari $Id: newcpu.c,v 1.25 2003/07/04 12:40:13 thothy Exp $";
 
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include "sysdeps.h"
 #include "hatari-glue.h"
 #include "maccess.h"

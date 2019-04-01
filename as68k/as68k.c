@@ -7,6 +7,9 @@
 #include <stdarg.h>
 #include "dict.h"
 
+typedef unsigned int uint;
+#define inline
+
 #define LAB_LEN	32
 #define BASE	0x1c
 FILE *fin;
@@ -1974,7 +1977,7 @@ int main (int argc, char **argv)
 		exit (0);
 	}
 
-	fout = fopen ("aout.prg", "w");
+	fout = fopen ("aout.prg", "wb");
 
 	printf ("Pass 1\n");
 	size = asm_pass1 ();

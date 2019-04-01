@@ -9,8 +9,13 @@
 
 #include <SDL.h>
 #include <sys/stat.h>
+#ifndef _MSC_VER
 #include <unistd.h>
 #include <dirent.h>
+#else
+#include "msvc_dirent.h"
+#endif
+#include "scandir.h"
 
 #include "main.h"
 #include "memAlloc.h"
@@ -620,7 +625,9 @@ int SDLGui_FileSelect(char *path_and_name, char *zip_path)
 	  else
 	    {
 	      /* Load directory entries: */
+//fprintf(stderr,"sdlgui.c using scandir without alphasort...!\n");
 	      entries = scandir(path, &files, 0, alphasort);
+//	      entries = scandir(path, &files, 0, 0);
 	    }
 
 	  if(entries<0)

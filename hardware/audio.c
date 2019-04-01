@@ -207,7 +207,11 @@ void Audio_Init(void)
   SoundBufferSize = desiredAudioSpec.size;      /* May be different than the requested one! */
 
   for (i=0; i<MAX_SAMPLES; i++) {
+#ifdef _MSC_VER
+	  sprintf (filename, "sfx/sfx_%02d.wav", i);
+#else
 	  snprintf (filename, sizeof (filename), "sfx/sfx_%02d.wav", i);
+#endif
 	  if (SDL_LoadWAV (filename, &desiredAudioSpec, &sfx_buf[i].buf,
 				  &sfx_buf[i].buf_len) == NULL) {
 	  	printf ("Error loading %s: %s\n", filename, SDL_GetError ());

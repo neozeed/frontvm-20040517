@@ -14,6 +14,8 @@
 #include "memAlloc.h"
 #include "stMemory.h"
 
+typedef unsigned int uint;
+
 static int buf_pos = 0;
 
 static void output (const char *format, ...)

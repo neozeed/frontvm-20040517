@@ -1,4 +1,4 @@
-
+CC=gcc
 SDLLIB = $(shell sdl-config --libs)
 SDLFLAGS = $(shell sdl-config --cflags)
 
@@ -15,7 +15,7 @@ SRCS = disasm.c audio.c configuration.c dialog.c \
   m68000.c main.c memAlloc.c misc.c \
   reset.c stMemory.c screen.c screenConvert.c \
   sdlgui.c shortcut.c scalebit.c \
-  loadfe2.c video.c input.c fe2.c
+  loadfe2.c video.c input.c fe2.c scandir.c glob.c
 
 OBJS = $(SRCS:.c=.o)
 

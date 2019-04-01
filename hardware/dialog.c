@@ -9,7 +9,9 @@
   or 'Cancel' the dialog we can compare and makes the necessary changes.
 */
 
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
 
 #include "main.h"
 #include "configuration.h"

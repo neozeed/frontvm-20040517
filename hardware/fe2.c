@@ -1,6 +1,6 @@
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_endian.h>
+#include <SDL.h>
+#include <SDL_endian.h>
 
 #include "main.h"
 #include "decode.h"

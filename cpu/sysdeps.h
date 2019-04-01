@@ -27,7 +27,7 @@
 #include <limits.h>
 
 #ifndef __STDC__
-#error "Your compiler is not ANSI. Get a real one."
+//#error "Your compiler is not ANSI. Get a real one."
 #endif
 
 #include <stdarg.h>

@@ -22,16 +22,26 @@ static long len;
 static long code_end;
 static int buf_pos;
 
+
 static int rd_int ()
 {
+#ifdef _MSC_VER
+	int val = STMemory_Swap68000Long (*(Uint32 *)((int )fe2file+buf_pos));
+#else
 	int val = STMemory_Swap68000Long (*(Uint32 *)(fe2file+buf_pos));
+#endif
+
 	buf_pos += 4;
 	return val;
 }
 
 static unsigned char rd_byte ()
 {
+#ifdef _MSC_VER
+	unsigned char val = *(unsigned char*)((int )fe2file+buf_pos);
+#else
 	unsigned char val = *(unsigned char*)(fe2file+buf_pos);
+#endif
 	buf_pos++;
 	return val;
 }
@@ -83,7 +93,11 @@ void LoadFE2 ()
 	
 	reloc = FE2BASE;
 	for (i=0x1c; i<code_end; i++) {
+#ifdef _MSC_VER
+		STMemory_WriteByte (reloc, *(char *)((int )fe2file+i));
+#else
 		STMemory_WriteByte (reloc, *(char *)(fe2file+i));
+#endif
 		reloc++;
 	}
 

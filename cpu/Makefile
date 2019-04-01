@@ -29,19 +29,20 @@ all: cpudefs.c cpuemu.c $(CPU_OBS)
 
 
 clean:
-	rm -f *.o gencpu build68k cpuopti cpudefs.c cpustbl.c cputbl.h cpuemu.c
+	rm -f *.o gencpu build68k cpuopti cpudefs.c cpustbl.c cputbl.h cpuemu.c gencpu.exe build68k.exe
 
 build68k: build68k.c
-	$(HOSTCC) $(CFLAGS) -o build68k build68k.c
+	$(HOSTCC) $(CFLAGS) $(SDLLIB) -o build68k build68k.c
 
 cpudefs.c: ./build68k ./table68k
-	./build68k <./table68k >cpudefs.c
+	./build68k <./table68k 	
+	mv stdout.txt cpudefs.c
 
 gencpu.o: gencpu.c
 	$(HOSTCC) $(CFLAGS) -c -o gencpu.o gencpu.c
 
 gencpu: gencpu.o readcpu.c cpudefs.c
-	$(HOSTCC) $(CFLAGS) $(LDFLAGS) -o gencpu gencpu.o readcpu.c cpudefs.c
+	$(HOSTCC) $(CFLAGS) $(LDFLAGS) $(SDLLIB) -o gencpu gencpu.o readcpu.c cpudefs.c
 
 cpuemu.c: gencpu
 	./gencpu

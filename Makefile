@@ -22,6 +22,8 @@ fe2.bin:
 
 clean:
 	$(MAKE) -C hardware/ clean
+	$(MAKE) -C cpu/ clean
+	$(MAKE) -C as68k/ clean
 	rm -f cpu/hatari-glue.o cpu/newcpu.o
 	rm -f frontier
 	$(MAKE) fe2clean

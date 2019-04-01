@@ -9,8 +9,10 @@
 
 #include <time.h>
 #include <signal.h>
+#ifndef _MSC_VER
 #include <sys/time.h>
 #include <unistd.h>
+#endif
 
 #include <SDL.h>
 
