@@ -566,7 +566,7 @@ void GemDOS_Create(unsigned long Params)
 {
   char szActualFileName[MAX_PATH];
   char *pszFileName;
-  char *rwflags[] = { "w+", /* read / write (truncate if exists) */
+  char *rwflags[] = { "wb+", /* read / write (truncate if exists) */
 		      "wb"  /* write only */
   };
   int Drive,Index,Mode;
